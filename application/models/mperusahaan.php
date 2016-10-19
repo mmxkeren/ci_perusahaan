@@ -19,9 +19,9 @@ class Mperusahaan extends CI_Model {
         }
     }
  
-    function get_perusahaan_bynama($nama) {
+    function get_perusahaan_bynama($id) {
         $this->db->from($this->tabel_pegawai);
-        $this->db->where('nama', $nama);
+        $this->db->where('id_pegawai', $id);
  
         $query = $this->db->get();
  
@@ -35,15 +35,15 @@ class Mperusahaan extends CI_Model {
        return TRUE;
     }
  
-    function get_update($nama,$data) {
+    function get_update($id,$data) {
  
-        $this->db->where('nama', $nama);
+        $this->db->where('id_pegawai', $id);
         $this->db->update($this->tabel_pegawai, $data);
  
         return TRUE;
     }
-    function del_perusahaan($nama) {
-        $this->db->where('nama', $nama);
+    function del_perusahaan($id) {
+        $this->db->where('id_pegawai', $id);
         $this->db->delete($this->tabel_pegawai);
         if ($this->db->affected_rows() == 1) {
  
@@ -51,5 +51,17 @@ class Mperusahaan extends CI_Model {
         }
         return FALSE;
     }
+
+    function count_pegawai(){
+        $query = $this->db->get($this->tabel)->num_rows();
+        return $query;
+    }
+
+    function count_pegawai_search($orlike) {
+        $this->db->or_like($orlike);
+        $query = $this->db->get($this->tabel);
+        return $query->num_rows();
+    }
+
 }
 ?>

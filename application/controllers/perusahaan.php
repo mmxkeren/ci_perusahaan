@@ -29,12 +29,12 @@ class Perusahaan extends CI_Controller {
          
  
         //ambil variabel dari form
-        //$id                = addslashes($this->input->post('id'));
+        $id_pegawai          = addslashes($this->input->post('id_pegawai'));
         $nama                = addslashes($this->input->post('nama'));
         $no_telp             = addslashes($this->input->post('no_telp'));
         $kota                = addslashes($this->input->post('kota'));
         $kelamin             = addslashes($this->input->post('kelamin'));
-        $is_posisi           = addslashes($this->input->post('id_posisi'));
+        $id_posisi           = addslashes($this->input->post('id_posisi'));
         $status              = addslashes($this->input->post('status'));
  
 //mengarahkan fungsi form sesuai dengan uri segmentnya
@@ -49,6 +49,7 @@ class Perusahaan extends CI_Controller {
             $this->load->view('vformperusahaan',$data);
         } else if ($mau_ke == "aksi_add") {//jika uri segmentnya aksi_add sebagai fungsi untuk insert
             $data = array(
+                'id_pegawai'=> $id_pegawai,
                 'nama'      => $nama,
                 'no_telp'   => $no_telp,
                 'kota'      => $kota,
@@ -61,6 +62,7 @@ class Perusahaan extends CI_Controller {
             redirect('perusahaan');
         } else if ($mau_ke == "aksi_edit") { //jika uri segmentnya aksi_edit sebagai fungsi untuk update
           $data = array(
+                'id_pegawai'=> $id_pegawai,
                 'nama'      => $nama,
                 'no_telp'   => $no_telp,
                 'kota'      => $kota,
@@ -74,16 +76,16 @@ class Perusahaan extends CI_Controller {
         }
  
     }
-    public function detail($nama){ //fungsi detail Perusahaan
+    public function detail($id){ //fungsi detail Perusahaan
         $data['title'] = 'Detail Perusahaan'; //judul title
-        $data['qPerusahaan'] = $this->mperusahaan->get_perusahaan_bynama($nama); //query model Perusahaan sesuai id
+        $data['qPerusahaan'] = $this->mperusahaan->get_perusahaan_bynama($id); //query model Perusahaan sesuai id
  
         $this->load->view('vdetperusahaan',$data); //meload views detail Perusahaan
     }
     public function hapus($gid){ //fungsi hapus Perusahaan sesuai dengan id
  
         $this->mperusahaan->del_perusahaan($gid);
-        $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Perusahaan berhasil dihapus</div>");
+        $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Pegawai berhasil dihapus</div>");
         redirect('perusahaan');
     }
 }

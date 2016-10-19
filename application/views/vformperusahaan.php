@@ -1,6 +1,7 @@
-<? $this->load->view('header');?>
-<?
+<?php $this->load->view('header');?>
+<?php
 if($aksi=='aksi_add'){
+    $id_pegawai="";
     $nama="";
     $no_telp="";
     $kota="";
@@ -9,9 +10,10 @@ if($aksi=='aksi_add'){
     $status="";
 }else{
   foreach($qdata as $rowdata){
-    $nama=$rowdata->kode_brg;
-    $no_telp=$rowdata->barcode;
-    $kota=$rowdata->nama_brg;
+    $id_pegawai=$rowdata->id_pegawai;
+    $nama=$rowdata->nama;
+    $no_telp=$rowdata->no_telp;
+    $kota=$rowdata->kota;
     $kelamin=$rowdata->kelamin;
     $id_posisi=$rowdata->id_posisi;
     $status=$rowdata->status;
@@ -27,7 +29,15 @@ if($aksi=='aksi_add'){
   <?=$this->session->flashdata('pesan')?>
      <form action="<?=base_url()?>perusahaan/form/<?=$aksi?>" method="post">
        <table class="table table-striped">
-
+        <tr>
+          <td>ID pegawai </td>
+          <td>
+            <div class="col-sm-6">
+                <input type="text" name="id_pegawai" class="form-control" value="<?=$id_pegawai?>">
+            </div>
+            </td>
+         </tr>
+         <tr>
          <tr>
           <td>Nama </td>
           <td>
@@ -40,7 +50,7 @@ if($aksi=='aksi_add'){
           <td>No Telp</td>
           <td>
             <div class="col-sm-2">
-                <input type="text" name="notelp" class="form-control" value="<?=$no_telp?>">
+                <input type="text" name="no_telp" class="form-control" value="<?=$no_telp?>">
             </div>
             </td>
          </tr>
@@ -48,7 +58,14 @@ if($aksi=='aksi_add'){
           <td>Kota</td>
           <td>
            <div class="col-sm-6">
-            <textarea  name="uraian" class="form-control"><?=$kota?></textarea>
+            <select name="kota" required="requreid" class="form-control">
+              <option></option>
+              <option value="1" <? if($aksi=="aksi_edit"){if($id_posisi=='1'){echo"selected=selected";}}?>Malang</option>
+              <option value="2" <? if($aksi=="aksi_edit"){if($id_posisi=='2'){echo"selected";}}?>Nganjuk</option>
+              <option value="3" <? if($aksi=="aksi_edit"){if($id_posisi=='3'){echo"selected";}}?>Blitar</option>
+              <option value="4" <? if($aksi=="aksi_edit"){if($id_posisi=='4'){echo"selected";}}?>Tulungagung</option>
+              <option value="5" <? if($aksi=="aksi_edit"){if($id_posisi=='5'){echo"selected";}}?>Surabaya</option>
+            </select>
            </div>
             </td>
          </tr>
@@ -58,9 +75,8 @@ if($aksi=='aksi_add'){
           <td> <div class="col-sm-5">
           <select name="kelamin" required="requreid" class="form-control">
            <option></option>
-           <option value="Papan" <? if($aksi=="aksi_edit"){if($kelamin=='Papan'){echo"selected=selected";}}?>>Papan</option>
-           <option value="Obat" <? if($aksi=="aksi_edit"){if($kelamin=='Obat'){echo"selected";}}?>>Obat</option>
-           <option value="Kelontong"<? if($aksi=="aksi_edit"){if($kelamin=='Kelontong'){echo"selected";}}?>>Kelontong</option>
+           <option value="1" <? if($aksi=="aksi_edit"){if($kelamin=='1'){echo"selected=selected";}}?>Laki-laki</option>
+           <option value="2" <? if($aksi=="aksi_edit"){if($kelamin=='2'){echo"selected";}}?>Perempuan</option>
           </select>
           </div>
           </td>
@@ -68,15 +84,26 @@ if($aksi=='aksi_add'){
           <td>posisi </td>
           <td>
            <div class="col-sm-4">
-            <input type="text" name="id_posisi" class="form-control" value="<?=$id_posisi?>">
-            </div>
-           </td>
+            <select name="id_posisi" required="requreid" class="form-control">
+              <option></option>
+              <option value="1" <? if($aksi=="aksi_edit"){if($id_posisi=='1'){echo"selected=selected";}}?>IT</option>
+              <option value="2" <? if($aksi=="aksi_edit"){if($id_posisi=='2'){echo"selected";}}?>HRD</option>
+              <option value="3" <? if($aksi=="aksi_edit"){if($id_posisi=='3'){echo"selected";}}?>Keungan</option>
+              <option value="4" <? if($aksi=="aksi_edit"){if($id_posisi=='4'){echo"selected";}}?>Produk</option>
+              <option value="5" <? if($aksi=="aksi_edit"){if($id_posisi=='5'){echo"selected";}}?>Marketing</option>
+            </select>
+          </div>
+        </td>
          </tr>
          <tr>
           <td>Status</td>
           <td>
           <div class="col-sm-4">
-            <input type="text" name="status" class="form-control" value="<?=$status?>">
+            <select name="status" required="requreid" class="form-control">
+              <option></option>
+              <option value="1" <? if($aksi=="aksi_edit"){if($id_posisi=='1'){echo"selected=selected";}}?>Pegawai Tetap</option>
+              <option value="2" <? if($aksi=="aksi_edit"){if($id_posisi=='2'){echo"selected";}}?>Freelance</option>
+            </select>
           </div>
           </td>
          </tr>
@@ -92,4 +119,4 @@ if($aksi=='aksi_add'){
     </div>    <!-- /panel -->
 
     </div> <!-- /container -->
-<? $this->load->view('footer');?>
+<?php $this->load->view('footer');?>
