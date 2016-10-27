@@ -10,7 +10,8 @@
        <table class="table table-striped">
         <thead>
          <tr>
-         <th>nama</th>
+         <th>No</th> 
+         <th>Nama</th>
          <th>No Telp</th>
          <th>Kota</th>
          <th>Kelamin</th>
@@ -20,11 +21,11 @@
          </tr>
         </thead>
         <tbody>
-        <? if(empty($qperusahaan)){ ?>
+        <?php if(empty($qperusahaan)){ ?>
          <tr>
           <td colspan="6">Data tidak ditemukan</td>
          </tr>
-        <? }else{
+        <?php }else{
           $no=0;
           foreach($qperusahaan as $rowperusahaan){ $no++;?>
          <tr>
@@ -41,10 +42,10 @@
            <a href="<?=base_url()?>perusahaan/hapus/<?=$rowperusahaan->nama?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="glyphicon glyphicon-trash"></i></a>
           </td>
          </tr>
-        <? }}?>
+        <?php }}?>
         </tbody>
        </table>
         </div>
     </div>    <!-- /panel -->
     </div> <!-- /container -->
-<? $this->load->view('footer');?>
+<?php $this->load->view('footer'); ?>

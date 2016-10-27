@@ -1,9 +1,9 @@
-<? $this->load->view('header');?>
-<?
+<?php $this->load->view('header');?>
+<?php
   foreach($qperusahaan as $rowdata){
-   $nama=$rowdata->kode_brg;
-    $no_telp=$rowdata->barcode;
-    $kota=$rowdata->nama_brg;
+   $nama=$rowdata->nama;
+    $no_telp=$rowdata->no_telp;
+    $kota=$rowdata->kota;
     $kelamin=$rowdata->kelamin;
     $id_posisi=$rowdata->id_posisi;
     $status=$rowdata->status;
@@ -49,4 +49,4 @@
     </div>    <!-- /panel -->
 
     </div> <!-- /container -->
-<? $this->load->view('footer');?>
+<?php $this->load->view('footer');?>

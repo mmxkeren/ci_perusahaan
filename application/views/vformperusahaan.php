@@ -1,5 +1,5 @@
-<? $this->load->view('header');?>
-<?
+<?php $this->load->view('header');?>
+<?php
 if($aksi=='aksi_add'){
     $nama="";
     $no_telp="";
@@ -9,9 +9,63 @@ if($aksi=='aksi_add'){
     $status="";
 }else{
   foreach($qdata as $rowdata){
-    $nama=$rowdata->kode_brg;
-    $no_telp=$rowdata->barcode;
-    $kota=$rowdata->nama_brg;
+    $nama=$rowdata->nama;
+    $no_telp=$rowdata->no_telp;
+    $kota=$rowdata->kota;
+    $kelamin=$rowdata->kelamin;
+    $id_posisi=$rowdata->id_posisi;
+    $status=$rowdata->status;
+  }
+}
+
+if($aksi=='aksi_kota'){
+    $nama="";
+    $no_telp="";
+    $kota="";
+    $kelamin="";
+    $id_posisi="";
+    $status="";
+}else{
+  foreach($qdata as $rowdata){
+    $nama=$rowdata->nama;
+    $no_telp=$rowdata->no_telp;
+    $kota=$rowdata->kota;
+    $kelamin=$rowdata->kelamin;
+    $id_posisi=$rowdata->id_posisi;
+    $status=$rowdata->status;
+  }
+}
+
+if($aksi=='aksi_kelamin'){
+    $nama="";
+    $no_telp="";
+    $kota="";
+    $kelamin="";
+    $id_posisi="";
+    $status="";
+}else{
+  foreach($qdata as $rowdata){
+    $nama=$rowdata->nama;
+    $no_telp=$rowdata->no_telp;
+    $kota=$rowdata->kota;
+    $kelamin=$rowdata->kelamin;
+    $id_posisi=$rowdata->id_posisi;
+    $status=$rowdata->status;
+  }
+}
+
+if($aksi=='aksi_posisi'){
+    $nama="";
+    $no_telp="";
+    $kota="";
+    $kelamin="";
+    $id_posisi="";
+    $status="";
+}else{
+  foreach($qdata as $rowdata){
+    $nama=$rowdata->nama;
+    $no_telp=$rowdata->no_telp;
+    $kota=$rowdata->kota;
     $kelamin=$rowdata->kelamin;
     $id_posisi=$rowdata->id_posisi;
     $status=$rowdata->status;
@@ -44,34 +98,73 @@ if($aksi=='aksi_add'){
             </div>
             </td>
          </tr>
+
+         <?php if(empty($qkelamin)){ ?>
          <tr>
-          <td>Kota</td>
-          <td>
-           <div class="col-sm-6">
-            <textarea  name="uraian" class="form-control"><?=$kota?></textarea>
-           </div>
-            </td>
+          <td>kelamin</td>
+          <td><div class="col-sm-5">Data tidak ditemukan</td>
          </tr>
-         <tr>
-         <tr>
+         <?php }else{
+          $no=1;
+          foreach($qkelamin as $rowkelamin){ $no++;?>
+
+          <tr>
           <td>kelamin</td>
           <td> <div class="col-sm-5">
           <select name="kelamin" required="requreid" class="form-control">
            <option></option>
-           <option value="Papan" <? if($aksi=="aksi_edit"){if($kelamin=='Papan'){echo"selected=selected";}}?>>Papan</option>
-           <option value="Obat" <? if($aksi=="aksi_edit"){if($kelamin=='Obat'){echo"selected";}}?>>Obat</option>
-           <option value="Kelontong"<? if($aksi=="aksi_edit"){if($kelamin=='Kelontong'){echo"selected";}}?>>Kelontong</option>
+           <option value="<?=$rowkelamin->id?>" <? if($aksi=="aksi_edit"){if($kelamin=='<?=$rowkelamin->id?>'){echo"selected=selected";}}?><?=$rowkelamin->nama?></option>
+           <option value="<?=$rowkelamin->id?>" <? if($aksi=="aksi_edit"){if($kelamin=='<?=$rowkelamin->id?>'){echo"selected";}}?><?=$rowkelamin->nama?></option>
           </select>
           </div>
           </td>
          </tr>
-          <td>posisi </td>
-          <td>
-           <div class="col-sm-4">
-            <input type="text" name="id_posisi" class="form-control" value="<?=$id_posisi?>">
-            </div>
-           </td>
+         <?php }}?>
+
+         <?php if(empty($qposisi)){ ?>
+         <tr>
+          <td>posisi</td>
+          <td><div class="col-sm-5">Data tidak ditemukan</td>
          </tr>
+         <?php }else{
+          $no=1;?>
+          
+
+          <tr>
+          <td>posisi</td>
+          <td> <div class="col-sm-5">
+          <select name="kelamin" required="requreid" class="form-control">
+           <option></option>
+           <?php foreach($qposisi as $rowposisi){ $no++;?>
+           <option value="<?=$rowposisi->id?>" <? if($aksi=="aksi_edit"){if($posisi=='<?=$rowposisi->id?>'){echo"selected";}}?><?=$rowposisi->nama?></option>           
+           <?php }?>
+          </select>
+          </div>
+          </td>
+         </tr>
+         <?php }?>
+
+         <?php if(empty($qkota)){ ?>
+         <tr>
+          <td>kota</td>
+          <td><div class="col-sm-5">Data tidak ditemukan</td>
+         </tr>
+         <?php }else{
+          $no=1;?>
+          <tr>
+          <td>kota</td>
+          <td> <div class="col-sm-5">
+          <select name="kelamin" required="requreid" class="form-control">
+           <option></option>
+           <?php foreach($qkota as $rowkota){ $no++;?>
+           <option value="<?=$rowkota->id?>" <? if($aksi=="aksi_edit"){if($posisi=='<?=$rowkota->id?>'){echo"selected";}}?><?=$rowkota->nama?></option>           
+           <?php }?>
+          </select>
+          </div>
+          </td>
+         </tr>
+         <?php }?>
+
          <tr>
           <td>Status</td>
           <td>
@@ -80,6 +173,8 @@ if($aksi=='aksi_add'){
           </div>
           </td>
          </tr>
+
+
        <tr>
           <td colspan="2">
             <input type="submit" class="btn btn-success" value="Simpan">
@@ -92,4 +187,4 @@ if($aksi=='aksi_add'){
     </div>    <!-- /panel -->
 
     </div> <!-- /container -->
-<? $this->load->view('footer');?>
+<?php $this->load->view('footer');?>
